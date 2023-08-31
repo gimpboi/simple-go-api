@@ -6,17 +6,17 @@ import (
 )
 // film represents data about a film
 type film struct {
-     title string "json:title"
-     director string "json:director"
-     released string "json:released"
-     genre string "json:genre"
+     Title string `json:"title"`
+	 Director string `json:"director"`
+     Released string `json:"released"`
+     Genre string `json:"genre"`
 }
 
 // test data
 var films = []film{
-    {title: "Mulholland Drive",director: "David Lynch",released: "2001", genre: "Detective Thriller"},
-    {title: "Schindler's List",director: "Steven Spielberg",released: "1993",genre: "Holocaust film"},
-    {title: "Who Killed Paranoid Man?",director: "Narty",released: "900",genre: "Tragedy"},
+    {Title: "Mulholland Drive",Director: "David Lynch",Released: "2001", Genre: "Detective Thriller"},
+    {Title: "Schindler's List",Director: "Steven Spielberg",Released: "1993",Genre: "Holocaust film"},
+    {Title: "Who Killed Paranoid Man?",Director: "Narty",Released: "900",Genre: "Tragedy"},
 }
 
 func main() {
