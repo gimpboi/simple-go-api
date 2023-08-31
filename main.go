@@ -26,6 +26,8 @@ func main() {
 	router.GET("/films",getFilms)
 	// Use a POST function to associate the POST HTTP method and the /albums path with a handler function
 	router.POST("/films",postFilms)
+
+	router.GET("/films/:title",getFilmByTitle)
 	// Use the RUN function to attach the router to an http.Server and start the server
 	router.Run("localhost:8080")
 }
@@ -47,4 +49,16 @@ func postFilms(c *gin.Context) {
 	// Add the new film to the slice
 	films = append(films, newFilm)
 	c.IndentedJSON(http.StatusCreated, newFilm)
+}
+
+func getFilmByTitle(c *gin.Context) {
+	title := c.Param("title")
+
+	for _,a := range films {
+		if a.Title == title {
+			c.IndentedJSON(http.StatusOK, a)
+			return
+		}
+	}
+	c.IndentedJSON(http.StatusNotFound,gin.H{"message":"film not found"})
 }
