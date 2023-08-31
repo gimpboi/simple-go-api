@@ -24,6 +24,8 @@ func main() {
 	router := gin.Default()
 	// Use a GET function to associate the GET HTTP method and the /albums path with a handler function
 	router.GET("/films",getFilms)
+	// Use a POST function to associate the POST HTTP method and the /albums path with a handler function
+	router.POST("/films",postFilms)
 	// Use the RUN function to attach the router to an http.Server and start the server
 	router.Run("localhost:8080")
 }
@@ -31,4 +33,18 @@ func main() {
 // getFilms responds with a list of all films as indented JSON
 func getFilms(c *gin.Context) {
      c.IndentedJSON(http.StatusOK, films)
+}
+
+// postFilms appends a film from JSON received in the request body
+func postFilms(c *gin.Context) {
+	var newFilm film
+
+	// bind received JSON to newFilm
+	if err := c.BindJSON(&newFilm); err != nil {
+		return
+	}
+
+	// Add the new film to the slice
+	films = append(films, newFilm)
+	c.IndentedJSON(http.StatusCreated, newFilm)
 }
